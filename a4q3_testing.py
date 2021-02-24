@@ -26,6 +26,7 @@ def close_enough(a, b, tolerance):
     """
     return abs(a - b) < tolerance
 
+
 test_suite_add_max = [
 
     {"inputs": [0],
@@ -165,7 +166,8 @@ for test_add_range in test_suite_add_range:
 
     # If the output and inputs aren't the same, then return error.
     if outputs != test_add_range["outputs"]:
-        print("Testing fault: add() + range() returned", outputs, "on inputs", inputs, "(", test_add_range["reason"], ")")
+        print("Testing fault: add() + range() returned", outputs, "on inputs", inputs, "(", test_add_range["reason"],
+              ")")
 
 test_suite_add_dict = [
 
