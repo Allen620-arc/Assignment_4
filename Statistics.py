@@ -34,27 +34,39 @@ class Statistics(object):
         Purpose:
             Initialize a Statistics object instance.
         """
-        self.__count = 0      # how many data values seen so far
-        self.__avg = 0        # the running average so far
-
+        self.__count = 0  # How many data values seen so far.
+        self.__avg = 0  # The running average so far.
+        self.__range = 0  # The running range so far.
+        self.__max = None  # The largest value so far.
+        self.__min = None  # The smallest value so far.
+        self.__mode = None  # The running mode so far.
+        self.__record = 0  # A record of individual numbers entering into a function.
+        self.__dict = {}  # An empty dictionary of the recorded values.
 
     def add(self, value):
         """
         Purpose:
-            Use the given value in the calculation of mean and 
-            variance.
+            Use the given value in the calculation of mean and variance.
         Pre-Conditions:
-            :param value: the value to be added
+            :param value: The value to be added.
         Post-Conditions:
-            none
+            (none)
         Return:
-            :return none
+            (none)
         """
         self.__count += 1
-        k = self.__count           # convenience
-        diff = value - self.__avg  # convenience
-        self.__avg += diff / k
-
+        self.__record += 1
+        self.__avg += (value - self.__avg) / self.__count
+        if self.__max is None or self.__min is None:
+            self.__min = value
+            self.__max = value
+        if value > self.__max:
+            self.__max = value
+        if value < self.__min:
+            self.__min = value
+        self.__range = self.__max - self.__min
+        self.__dict = dict(zip(str(value), str(self.__record)))
+        self.__mode = self.__dict
 
     def mean(self):
         """
@@ -64,20 +76,66 @@ class Statistics(object):
             (none)
         Return:
             The mean of the data seen so far.
-            Note: if no data has been seen, 0 is returned.
-                  This is clearly false.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
         """
         return self.__avg
 
     def count(self):
         """
         Purpose:
-            Return the number of values seen so far.
+            Return the values seen so far.
         Post-conditions:
             (none)
         Return:
             The number of values seen so far.
-            Note: if no data has been seen, 0 is returned.
-                  This is clearly false.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
         """
         return self.__count
+
+    def max(self):
+        """
+        Purpose:
+            Return the largest value seen so far.
+        Post-conditions:
+            (none)
+        Return:
+            The number of values seen so far.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
+        """
+        return self.__max
+
+    def min(self):
+        """
+        Purpose:
+            Return the smallest value seen so far.
+        Post-conditions:
+            (none)
+        Return:
+            The number of values seen so far.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
+        """
+        return self.__min
+
+    def range(self):
+        """
+        Purpose:
+            Return the range of values seen so far.
+        Post-conditions:
+            (none)
+        Return:
+            The range of the values seen so far.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
+        """
+        return self.__range
+
+    def mode(self):
+        """
+        Purpose:
+            Return the most common value seen so far.
+        Post-conditions:
+            (none)
+        Return:
+            The number of values seen so far.
+            Note: If no data has been seen, 0 is returned. This is clearly false.
+        """
+        return self.__mode
