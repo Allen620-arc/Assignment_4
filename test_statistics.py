@@ -13,7 +13,7 @@
 
 # This script is a starter file for testing the Statistics ADT
 
-import Statistics as S
+import a4q3 as S
 
 
 def close_enough(a, b, tolerance):
@@ -141,9 +141,5 @@ result = stats.mean()
 
 if not close_enough(expected, result, 0.0001):
     print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
-
-
-
-
 
 print('*** Test script completed ***')
