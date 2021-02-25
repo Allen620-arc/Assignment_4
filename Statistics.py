@@ -74,6 +74,8 @@ class Statistics(object):
         else:
             self.__dict[value] = 1
 
+        self.__mode = max(self.__dict, key = self.__dict.get)
+
     def mean(self):
         """
         Purpose:

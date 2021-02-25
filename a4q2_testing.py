@@ -308,10 +308,57 @@ for test_add_dict in test_suite_add_dict:
     inputs = S.Statistics()
     for v in test_add_dict["inputs"]:
         inputs.add(v)
-    outputs = inputs.mode()
+    outputs = inputs.dict()
 
     # If the output and inputs aren't the same, then return error.
     if outputs != test_add_dict["outputs"]:
-        print("Testing fault: add() + mode() returned", outputs, "on inputs", inputs, "(", test_add_dict["reason"], ")")
+        print("Testing fault: add() + dict() returned", outputs, "on inputs", inputs, "(", test_add_dict["reason"], ")")
+
+test_suite_add_mode = [
+
+    {"inputs": [0],
+     "outputs": 0,
+     "reason": "Check count after one value is counted."},
+
+    {"inputs": [0, 1],
+     "outputs": 0,
+     "reason": "Check count after two values are counted."},
+
+    {"inputs": [0, 1, 2],
+     "outputs": 0,
+     "reason": "Check count after three values are counted."},
+
+    {"inputs": [0, 0, 0],
+     "outputs": 0,
+     "reason": "Check average from three values in a list."},
+
+    {"inputs": [1, 2, 3, 4, 5],
+     "outputs": 1,
+     "reason": "Check average from five values in a list."},
+
+    {"inputs": [1.1, 1.01, 1.001],
+     "outputs": 1.1,
+     "reason": "Check average from three values in a list."},
+
+    {"inputs": [21, 62, 17],
+     "outputs": 21,
+     "reason": "Check average from three values in a list."},
+
+    {"inputs": [-1, 2, 2],
+     "outputs": 2,
+     "reason": "Check average from three values in a list."},
+]
+
+for test_add_mode in test_suite_add_mode:
+
+    # Call the operation.
+    inputs = S.Statistics()
+    for v in test_add_mode["inputs"]:
+        inputs.add(v)
+    outputs = inputs.mode()
+
+    # If the output and inputs aren't the same, then return error.
+    if outputs != test_add_mode["outputs"]:
+        print("Testing fault: add() + mode() returned", outputs, "on inputs", inputs, "(", test_add_mode["reason"], ")")
 
 print('*** Test script completed ***')
