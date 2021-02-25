@@ -65,7 +65,7 @@ class Statistics(object):
         if value < self.__min:
             self.__min = value
         self.__range = self.__max - self.__min
-        self.__dict = dict(zip(str(value), str(self.__record)))
+        self.__dict[value] = self.__record
         self.__mode = self.__dict
 
     def mean(self):
