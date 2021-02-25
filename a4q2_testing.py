@@ -26,7 +26,6 @@ def close_enough(a, b, tolerance):
     """
     return abs(a - b) < tolerance
 
-
 test_suite_add_count = [
 
     {"inputs": [0],
@@ -268,51 +267,51 @@ for test_add_range in test_suite_add_range:
     if outputs != test_add_range["outputs"]:
         print("Testing fault: add() + range() returned", outputs, "on inputs", inputs, "(", test_add_range["reason"], ")")
 
-test_suite_add_mode = [
+test_suite_add_dict = [
 
     {"inputs": [0],
-     "outputs": 0,
+     "outputs": {0: 1},
      "reason": "Check count after one value is counted."},
 
     {"inputs": [0, 1],
-     "outputs": None,
+     "outputs": {0: 1, 1: 1},
      "reason": "Check count after two values are counted."},
 
     {"inputs": [0, 1, 2],
-     "outputs": None,
+     "outputs": {0: 1, 1: 1, 2: 1},
      "reason": "Check count after three values are counted."},
 
     {"inputs": [0, 0, 0],
-     "outputs": 0,
+     "outputs": {0: 3},
      "reason": "Check average from three values in a list."},
 
     {"inputs": [1, 2, 3, 4, 5],
-     "outputs": None,
+     "outputs": {1: 1, 2: 1, 3: 1, 4: 1, 5: 1},
      "reason": "Check average from five values in a list."},
 
     {"inputs": [1.1, 1.01, 1.001],
-     "outputs": None,
+     "outputs": {1.1: 1, 1.01: 1, 1.001: 1},
      "reason": "Check average from three values in a list."},
 
     {"inputs": [21, 62, 17],
-     "outputs": None,
+     "outputs": {21: 1, 62: 1, 17: 1},
      "reason": "Check average from three values in a list."},
 
     {"inputs": [-1, 2, 2],
-     "outputs": 2,
+     "outputs": {-1: 1, 2: 2},
      "reason": "Check average from three values in a list."},
 ]
 
-for test_add_mode in test_suite_add_mode:
+for test_add_dict in test_suite_add_dict:
 
     # Call the operation.
     inputs = S.Statistics()
-    for v in test_add_mode["inputs"]:
+    for v in test_add_dict["inputs"]:
         inputs.add(v)
     outputs = inputs.mode()
 
     # If the output and inputs aren't the same, then return error.
-    if outputs != test_add_mode["outputs"]:
-        print("Testing fault: add() + mode() returned", outputs, "on inputs", inputs, "(", test_add_mode["reason"], ")")
+    if outputs != test_add_dict["outputs"]:
+        print("Testing fault: add() + mode() returned", outputs, "on inputs", inputs, "(", test_add_dict["reason"], ")")
 
 print('*** Test script completed ***')
