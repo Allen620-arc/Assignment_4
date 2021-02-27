@@ -37,53 +37,71 @@ class Card(object):
         Return:
             A list of lists of cards to a number of players in a game.
         """
-        random_card = random.choice(deck)
-        cards_dealt = [[random_card] * num_cards] * num_players
+        cards_dealt = []
+        player_list = []
+        while len(deck) > 0:
+            random_card = random.choice(deck)
+            if random_card in deck:
+                deck.remove(random_card)
+                player_list.append(random_card)
+            cards_dealt.append(player_list)
         return cards_dealt
 
-    def value(self, cards):
+    def value(self, card):
         """
         Purpose:
-            Return the average of all the values seen so far.
+            Takes in the string of a card, and returns its integer value.
         Pre-Conditions:
-            :param cards: The value to be added.
+            :param cards: The string of a card.
         Post-conditions:
             (none)
         Return:
-            The mean of the data seen so far.
-            Note: If no data has been seen, 0 is returned. This is clearly false.
+            The card's integer value.
         """
-        return cards
+        card_dict = {'AH': 1, '2H': 2, '3H': 3, '4H': 4, '5H': 5, '6H': 6, '7H': 7, '8H': 8, '9H': 9, '10H': 10,
+                     'JH': 11, 'QH': 12, 'KH': 13, 'AD': 1, '2D': 2, '3D': 3, '4D': 4, '5D': 5, '6D': 6, '7D': 7,
+                     '8D': 8, '9D': 9, '10D': 10, 'JD': 11, 'QD': 12, 'KD': 13, 'AS': 1, '2S': 2, '3S': 3, '4S': 4,
+                     '5S': 5, '6S': 6, '7S': 7, '8S': 8, '9S': 9, '10S': 10, 'JS': 11, 'QS': 12, 'KS': 13, 'AC': 1,
+                     '2C': 2, '3C': 3, '4C': 4, '5C': 5, '6C': 6, '7C': 7, '8C': 8, '9C': 9, '10C': 10, 'JC': 11,
+                     'QC': 12, 'KC': 13}
+        card_value = card_dict[card]
+        return card_value
 
-    def highest(self, list_of_card):
+    def highest(self, list_of_cards):
         """
         Purpose:
-            Return the average of all the values seen so far.
+            Takes a list of cards, and returns the the card string with the highest value.
         Pre-Conditions:
-            :param list_of_card: The value to be added.
+            :param list_of_cards: A list of card strings.
         Post-conditions:
             (none)
         Return:
-            The mean of the data seen so far.
-            Note: If no data has been seen, 0 is returned. This is clearly false.
+            The card string with the highest value.
         """
-        return self.__highest
+        dict_of_cards = {}
+        for card in list_of_cards:
+            dict_of_cards[card] = self.value(card)
+        largest_card = max(dict_of_cards)
+        return largest_card
 
-    def lowest(self, list_of_card):
+    def lowest(self, list_of_cards):
         """
         Purpose:
-            Return the average of all the values seen so far.
+            Takes a list of cards, and returns the card string with the lowest value.
         Pre-Conditions:
-            :param list_of_card: The value to be added.
+            :param list_of_cards: A list of card strings.
         Post-conditions:
             (none)
         Return:
-            The mean of the data seen so far.
-            Note: If no data has been seen, 0 is returned. This is clearly false.
+            The card string with the lowest value.
         """
-        return self.__lowest
+        dict_of_cards = {}
+        for card in list_of_cards:
+            dict_of_cards[card] = self.value(card)
+        smallest_card = min(dict_of_cards)
+        return smallest_card
 
-    def average(self, list_of_card):
+    def average(self, list_of_cards):
         """
         Purpose:
             Return the average of all the values seen so far.
@@ -93,5 +111,4 @@ class Card(object):
             The mean of the data seen so far.
             Note: If no data has been seen, 0 is returned. This is clearly false.
         """
-        return self.__average
-
+        return list_of_cards

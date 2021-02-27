@@ -1,32 +1,10 @@
-# CMPT 145 Course material
-# Copyright (c) 2017-2020 Michael C Horsch
-# All rights reserved.
-#
-# This document contains resources for homework assigned to students of
-# CMPT 145 and shall not be distributed without permission.  Posting this 
-# file to a public or private website, or providing this file to a person 
-# not registered in CMPT 145, constitutes Academic Misconduct, according 
-# to the University of Saskatchewan Policy on Academic Misconduct.
-# 
-# Synopsis:
-#   Defines the Statistics ADT
-#   Calculate mean and variance and other statistical summaries  
-#   of numeric data.
+"""
+  Name: Allen Keettikkal
+  NSID: alk423
+  Student Number: 11278995
+  Instructor: Jeffrey Long
+"""
 
-# Implementation
-# Do the calculations without storing all the data!
-# Use a Python dictionary as a record to store three quantities:
-#   _count':     the number of data values added
-#   _avg':       the running average of the values added
-
-# These values can be modified every time a new data value is 
-# added, so that the mean and variance can be calculated quickly  
-# as needed.  This approach means that we do not need to store  
-# the data values themselves, which could save a lot of space.
-#
-# NOTE: This file does not contain the full ADT as shown in class.  
-#       The calculations for var() and sampvar() were removed to 
-#       keep the exercise concise.
 
 class Statistics(object):
     def __init__(self):
@@ -74,7 +52,7 @@ class Statistics(object):
         else:
             self.__dict[value] = 1
 
-        self.__mode = max(self.__dict, key = self.__dict.get)
+        self.__mode = max(self.__dict, key=self.__dict.get)
 
     def mean(self):
         """
